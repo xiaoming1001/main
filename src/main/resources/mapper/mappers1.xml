@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.shiwu.dao.DaoInt">
+    <!--根据账号转账-->
+    <update id="update1" parameterType="com.study.shiwu.entity.User">
+        update shiwu set money=#{money} where card=#{card}
+    </update>
+
+    <!--查询出账户金额-->
+    <select id="select1" parameterType="com.study.shiwu.entity.User" resultType="com.study.shiwu.entity.User">
+        select card,money from shiwu where card=#{card}
+    </select>
+
+</mapper>

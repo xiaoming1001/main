@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript"  src="static/jquery-1.12.4.js"></script>
+    <title>测试事务</title>
+</head>
+<body>
+<input type="text" name="card1" placeholder="输入你的账号" id="a1"><br/>
+<input type="text" name="card2" placeholder="输入对方账号" id="a2"><br/>
+<input type="text" name="money" placeholder="输入转账金额" id="a3"><br/>
+<button id="button1">开始转账</button>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#button1").click(function () {
+            card1=$("#a1").val();
+            card2=$("#a2").val();
+            money=$("#a3").val();
+            $.ajax({
+                type:"post",
+                url:"http://localhost:8080/test1",
+                dataType:"json",
+                data:{
+                    "card1":card1,
+                    "card2":card2,
+                    "money":money
+                },
+                error:function () {
+                    alert("系统异常！！！！请等待维护");
+                },
+                success:function (e) {
+                    if (e==200){
+                        alert("转账成功！！！！");
+                    }else if (e==201){
+                        alert("账户余额不足！！！请保证有足够的资金")
+                    }
+
+                }
+            })
+        })
+    })
+</script>
+
+<style type="text/css">
+    #a1{
+        width: 300px;
+        height: 45px;
+
+    }
+    #a2{
+        width: 300px;
+        height: 45px;
+        margin-top: 10px;
+    }
+    #a3{
+        width: 300px;
+        height: 45px;
+        margin-top: 10px;
+    }
+    #button1{
+        width: 300px;
+        height: 45px;
+        margin-top: 10px;
+        color: red;
+        background: bisque;
+    }
+</style>
+</html>
