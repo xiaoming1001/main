@@ -28,6 +28,7 @@ public class ServiceImp implements ServiceInt {
     public String update1(String card1,String card2,double money) {
         String str="";
         //通过账号获得卡内余额
+
       User user=dao.select1(card1);
       User user1=dao.select1(card2);
       log.info("原账号"+card1+"的余额是"+user.getMoney());
