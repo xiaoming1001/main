@@ -33,6 +33,7 @@ public class ServiceImp implements ServiceInt {
       log.info("被转账的账号"+card2+"的余额是"+user.getMoney());
 
 
+
         //进行金额加减
         if (user.getMoney()>money){
             double money1=user.getMoney()-money;
