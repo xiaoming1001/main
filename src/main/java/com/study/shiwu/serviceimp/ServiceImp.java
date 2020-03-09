@@ -41,6 +41,7 @@ public class ServiceImp implements ServiceInt {
             double money1=user.getMoney()-money;
             double money2=user1.getMoney()+money;
 
+
             dao.update1(card1, money1);
             int i=1/0;
             dao.update1(card2, money2);
