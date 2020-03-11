@@ -10,7 +10,32 @@
 
     <!--查询出账户金额-->
     <select id="select1" parameterType="com.study.shiwu.entity.User" resultType="com.study.shiwu.entity.User">
-        select card,money from shiwu where card=#{card}
+        select * from shiwu where card=#{card}
     </select>
+
+    <!--添加用户-->
+    <insert id="addUser" parameterType="com.study.shiwu.entity.User">
+       insert into shiwu
+       <trim prefix="(" suffix= ")" suffixOverrides=",">
+           <if test="uname!= null">uname,</if>
+           <if test="card!= null ">card,</if>
+           <if test="money!= null">money,</if>
+       </trim>
+       values
+       <trim prefix="(" suffix= ")" suffixOverrides=",">
+           <if test="uname!= null">#{uname},</if>
+           <if test="card!=null ">#{card},</if>
+           <if test="money!=null ">#{money},</if>
+       </trim>
+    </insert>
+
+    <!--修改余额-->
+    <update id="updateUser" parameterType="com.study.shiwu.entity.User">
+        update shiwu
+        <set>
+            <if test="money!=null ">card=#{money}</if>
+        </set>
+        where card=#{card}
+    </update>
 
 </mapper>

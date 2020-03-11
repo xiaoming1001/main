@@ -17,4 +17,8 @@ public interface DaoInt {
      */
     User select1(String card);
 
+    void addUser(User user);
+
+    void updateUser(String card,double money);
+
 }

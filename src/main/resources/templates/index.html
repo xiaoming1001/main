@@ -9,9 +9,35 @@
 <input type="text" name="card1" placeholder="输入你的账号" id="a1"><br/>
 <input type="text" name="card2" placeholder="输入对方账号" id="a2"><br/>
 <input type="text" name="money" placeholder="输入转账金额" id="a3"><br/>
-<button id="button1">开始转账</button>
+<button id="button1">开始转账</button><br/>
+
+
+<!--<input type="text" name="card" placeholder="输入账号" id="ccx"><br/>
+<button id="cx">开始查询</button>-->
 </body>
 <script type="text/javascript">
+    //查询
+  /*  $(function () {
+        $("#cx").click(function () {
+            var card=$("#ccx").val();
+            alert(card);
+            $.ajax({
+                type:"post",
+                url: "http://localhost:8080/test2",
+                data:{
+                    "card":card
+                },
+                error:function () {
+                    alert("异常");
+                },
+                success:function (e) {
+                    alert("返回的数据是："+e);
+                }
+            })
+        })
+    })*/
+
+    // 转账
     $(function () {
         $("#button1").click(function () {
             card1=$("#a1").val();
