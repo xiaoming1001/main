@@ -36,6 +36,7 @@ public class Swagger2 {
         return docket;
     }
 
+    //可配置，可不配置（看心情）
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("小明嘟嘟嘟")
