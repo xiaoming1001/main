@@ -3,16 +3,13 @@ package com.study.shiwu.interceptor;    /**
  * @date: 2020/3/11
  */
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
+
+import com.study.shiwu.util.JwtTokenUtil;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.Soundbank;
 
 /**
  * @author zm
@@ -23,10 +20,10 @@ public class UserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getParameter("card").equals("1006")){
-            System.out.println("权限不足，不能查询此用户！！！");
-            return false;
-        }
+        System.out.println("请求方式：："+request.getMethod());
+        System.out.println("拦截到的token："+request.getHeader("token"));
+        String token=request.getHeader("token");
+        JwtTokenUtil.verifyToken(token);
         return true;
     }
 

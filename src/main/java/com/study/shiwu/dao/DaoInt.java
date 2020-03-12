@@ -1,5 +1,6 @@
 package com.study.shiwu.dao;
 
+import com.study.shiwu.entity.Use;
 import com.study.shiwu.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,5 +21,7 @@ public interface DaoInt {
     void addUser(User user);
 
     void updateUser(String card,double money);
+
+    Use selectUser(String account,String pwd);
 
 }

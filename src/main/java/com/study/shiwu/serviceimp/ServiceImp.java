@@ -1,6 +1,7 @@
 package com.study.shiwu.serviceimp;
 
 import com.study.shiwu.dao.DaoInt;
+import com.study.shiwu.entity.Use;
 import com.study.shiwu.entity.User;
 import com.study.shiwu.error.TestException;
 import com.study.shiwu.error.ZengError;
@@ -70,6 +71,11 @@ public class ServiceImp implements ServiceInt {
 
     public void updateUser(String card,double money){
         dao.updateUser(card,money);
+    }
+
+    //测试test'
+    public Use selectUser(String account,String pwd){
+        return  dao.selectUser(account, pwd);
     }
 
 }

@@ -38,4 +38,8 @@
         where card=#{card}
     </update>
 
+    <select id="selectUser" parameterType="com.study.shiwu.entity.Use" resultType="com.study.shiwu.entity.Use">
+        select * from user where account=#{account} and pwd=#{pwd}
+    </select>
+
 </mapper>

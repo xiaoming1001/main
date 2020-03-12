@@ -1,5 +1,6 @@
-package com.study.shiwu.interceptor;
+package com.study.shiwu.config;
 
+import com.study.shiwu.interceptor.UserInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,8 +13,8 @@ public class UserWebMvc implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //添加自定义的拦截器
-        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**");
+        //添加自定义的拦截器   excludePathPatterns("/testToken")哪些方法不被拦截
+        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns("/testToken");
         System.out.println("拦截器已启动");
     }
 
