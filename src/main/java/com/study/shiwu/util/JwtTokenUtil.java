@@ -1,5 +1,7 @@
 package com.study.shiwu.util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -8,8 +10,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.study.shiwu.constant.StaticConst;
 import com.study.shiwu.error.ZengError;
 import com.study.shiwu.response.ResponseStatus;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;

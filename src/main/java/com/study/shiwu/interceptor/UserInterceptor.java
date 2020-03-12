@@ -23,6 +23,7 @@ public class UserInterceptor implements HandlerInterceptor {
         System.out.println("请求方式：："+request.getMethod());
         System.out.println("拦截到的token："+request.getHeader("token"));
         String token=request.getHeader("token");
+        //验证是否有token
         JwtTokenUtil.verifyToken(token);
         return true;
     }

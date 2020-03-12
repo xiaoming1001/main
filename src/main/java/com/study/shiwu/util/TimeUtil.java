@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 时间戳工具类
+ * 时间转换工具类
  * @author ：ding
  * @date ：Created in 2019/12/7 9:47
  */

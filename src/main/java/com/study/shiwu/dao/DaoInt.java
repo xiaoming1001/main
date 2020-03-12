@@ -11,11 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DaoInt {
     void update1(String card,double money);
 
-    /**
-     * @param card
-     * @return
-     * 查询原本金额
-     */
+    //测试多数据源一号
     User select1(String card);
 
     void addUser(User user);
@@ -23,5 +19,8 @@ public interface DaoInt {
     void updateUser(String card,double money);
 
     Use selectUser(String account,String pwd);
+
+    //测试多数据源一号
+    void add1(Use use);
 
 }
