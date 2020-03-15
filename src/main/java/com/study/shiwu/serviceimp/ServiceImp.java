@@ -1,30 +1,27 @@
 package com.study.shiwu.serviceimp;
 
 import com.study.shiwu.dao.DaoInt;
+import com.study.shiwu.dao.UserDao;
 import com.study.shiwu.entity.Use;
-import com.study.shiwu.entity.User;
-import com.study.shiwu.error.TestException;
+import com.study.shiwu.entity.User;;
 import com.study.shiwu.error.ZengError;
-import com.study.shiwu.response.ResponseBody;
 import com.study.shiwu.response.ResponseStatus;
-import com.study.shiwu.serviceint.ServiceInt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Reader;
-import java.sql.SQLException;
 
 /**
  * @author ASUS
  */
 @Service
-public class ServiceImp implements ServiceInt {
+public class ServiceImp{
     @Autowired
     private DaoInt dao;
-
+    @Autowired
+    private UserDao userDao;
     private static final Logger log= LoggerFactory.getLogger(ServiceImp.class);
 
     @Transactional(rollbackFor = Exception.class)
@@ -39,7 +36,6 @@ public class ServiceImp implements ServiceInt {
         if (user.getMoney()>money){
             double money1=user.getMoney()-money;
             double money2=user1.getMoney()+money;
-
 
             dao.update1(card1, money1);
             //int i=1/0;
@@ -77,5 +73,7 @@ public class ServiceImp implements ServiceInt {
     public Use selectUser(String account,String pwd){
         return  dao.selectUser(account, pwd);
     }
+    //测试test_db
+    public void addUser1(String account){userDao.addUser1(account);}
 
 }

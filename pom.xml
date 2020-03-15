@@ -12,6 +12,7 @@
     <artifactId>shiwu</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>shiwu</name>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -84,6 +85,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.51</version>
+        </dependency>
+
+        <!--动态数据源-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.26</version>
         </dependency>
 
 

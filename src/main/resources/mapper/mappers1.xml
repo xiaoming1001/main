@@ -42,4 +42,5 @@
         select * from user where account=#{account} and pwd=#{pwd}
     </select>
 
+
 </mapper>

@@ -21,7 +21,8 @@ public class DataSourceAspect {
         //如果连接点所属的类实例是DaoInt
         if(point.getTarget() instanceof DaoInt){
             DatabaseContextHolder.setDatabaseType(DataBaseType.test);
-        }else{//连接点是UserDao,可以不写是默认的数据源
+        }else{
+            //连接点是UserDao,可以不写是默认的数据源
             DatabaseContextHolder.setDatabaseType(DataBaseType.test_db);
         }
     }

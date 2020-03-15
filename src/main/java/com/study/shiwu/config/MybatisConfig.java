@@ -59,7 +59,6 @@ public class MybatisConfig {
      * @Primary 该注解表示在同一个接口有多个实现类可以注入的时候，默认选择哪一个，而不是让@autowire注解报错
      * @Qualifier 根据名称进行注入，通常是在具有相同的多个类型的实例的一个注入（例如有多个DataSource类型的实例）
      */
-
     @Bean
     @Primary
     public DynamicDataSource dataSource(@Qualifier("myTestDbDataSource") DataSource myTestDbDataSource,
@@ -69,7 +68,7 @@ public class MybatisConfig {
         targetDataSources.put(DataBaseType.test, myTestDbDataSource);
         targetDataSources.put(DataBaseType.test_db, myTestDb2DataSource);
         dataSource.setTargetDataSources(targetDataSources);// 该方法是AbstractRoutingDataSource的方法
-        dataSource.setDefaultTargetDataSource(myTestDbDataSource);// 默认的datasource设置为myTestDbDataSource
+        dataSource.setDefaultTargetDataSource(myTestDbDataSource);// 默认的datasource设置为myTestDbDataSource(未指定的时候就使用默认的)
 
         return dataSource;
     }
@@ -83,7 +82,7 @@ public class MybatisConfig {
         fb.setDataSource(ds);
         // 下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
         fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));// 指定基包
-       /* 最关键的就是这一句代码：
+       /* 最关键的一句代码：
         fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:Mapper.xml"));
         让mybatis到这个指定的路径去找到他的mapper.xml文件。对！效果其实是和yml中的
         mybatis.mapperLocations:是一样的。但是在配置多个数据源时候我们只能手动去配置。而这个配置文件里面的路径写不写都没有影响了*/

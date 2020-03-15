@@ -1,10 +1,13 @@
 package com.study.shiwu.entity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author ASUS
  */
 public class User {
-    private int is;
+    @NotNull(message = "用户ID不能为空")
+    private int id;
     private String uname;
     private String card;
     private double money;
@@ -17,12 +20,12 @@ public class User {
         this.uname = uname;
     }
 
-    public int getIs() {
-        return is;
+    public int getId() {
+        return id;
     }
 
-    public void setIs(int is) {
-        this.is = is;
+    public void setId(int id) {
+        this.id = id;
     }
 
 
@@ -45,7 +48,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "is=" + is +
+                "is=" + id +
                 ", uanme='" + uname + '\'' +
                 ", card='" + card + '\'' +
                 ", money=" + money +

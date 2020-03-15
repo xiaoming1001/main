@@ -1,0 +1,27 @@
+        @Param ：作用于dao层，参数名与mapper中的SQL不一致时使用 @Param("sql中的名字") String name
+
+        =======================================================Controller=====================================================================
+        @ApiOperation(value = “接口说明”, httpMethod = “接口请求方式”, response = “接口返回参数类型”, notes = “接口发布说明”）   **同在请求的方法上，是对方法的说明
+        @RequestParam：   @RequestParam(value="",required = , defaultValu="设置默认参数值")  如果没有传入参数值，就使用默认参数，此时required失效
+        @Api(tags = "管理员接口")   用在请求的类上，是对类的说明
+        @ApiParam(required = “是否必须参数”, name = “参数名称”, value = “参数具体描述”）
+        @ApiImplicitParams({ 示例 })     用在请求方法上，表示一组参数说明
+            示例：@ApiImplicitParam(name = "personName",value = "姓名",paramType = "query",dataType = "String"),
+                 @ApiImplicitParam(name = "personName",value = "姓名",paramType = "query",dataType = "String"),
+                 name：参数名    value：参数的汉字说明、解释     required：参数是否必须传    paramType：参数放在哪个地方
+        @PathVariable  请求占位符，运用在方法参数内
+            示例：@RequestMapping("add/{name}")  浏览器请求url:http：127.0.0.1：8080/test？name="猪猪侠"
+                 @PathVariable（“name”）String name
+        @PutMapping   应用场景：执行更新操作，后一个请求需要覆盖前一个请求
+
+
+        ==========================================================Pojo==================================================================
+        @ApiModelProperty(value = "用户ID（属性描述）",example = "1001(属性示例)")      **作用于实体类的每个属性上面
+        @ApiModel("课程"（描述这个类，相当于别名）)                                      **在实体类上边使用，标记类时swagger的解析类
+        @Data                                                                       **作用于实体类上面，简化开发，省去了get(),set(),tostring()等方法
+        @AllArgsConstructor                                                         **使用后添加一个构造一个有参构造函数
+        @NoArgsConstructor                                                          **使用后创建一个无参构造函数
+
+        ==============================================================xml==============================================================
+        configuration-map-underscore-to-camel-case: true
+        该配置项就是指将带有下划线的表字段映射为驼峰格式的实体类属性

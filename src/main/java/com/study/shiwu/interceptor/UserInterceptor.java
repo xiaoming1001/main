@@ -2,8 +2,6 @@ package com.study.shiwu.interceptor;    /**
  * @author: wxs
  * @date: 2020/3/11
  */
-
-
 import com.study.shiwu.util.JwtTokenUtil;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,8 +21,8 @@ public class UserInterceptor implements HandlerInterceptor {
         System.out.println("请求方式：："+request.getMethod());
         System.out.println("拦截到的token："+request.getHeader("token"));
         String token=request.getHeader("token");
-        //验证是否有token
-        JwtTokenUtil.verifyToken(token);
+        //验证是否有token***
+        //JwtTokenUtil.verifyToken(token);
         return true;
     }
 

@@ -22,14 +22,14 @@ public class Controll {
     private ServiceImp si;
     private static final Logger log= LoggerFactory.getLogger(Controll.class);
 
+    @ApiOperation("转账")
     @RequestMapping("test1")
-    public String update(String card1,String card2,double money){
+    public ResponseBody update(String card1,String card2,double money){
         log.info("账户是："+card1);
         log.info("被转账的账户是："+card2);
         log.info("转账金额是："+money);
         String str=si.update1(card1,card2, money);
-        log.info("控制层："+str);
-        return str;
+        return new ResponseBody(ResponseStatus.SUCCESS);
     }
 
     @ApiOperation("查询数据")
@@ -50,6 +50,13 @@ public class Controll {
     @ApiOperation("修改用户")
     @PostMapping("updateUser")
     public ResponseBody updateUser(String card,double money){
+        return new ResponseBody(ResponseStatus.SUCCESS);
+    }
+
+    @ApiOperation("测试数据库2号：test_db")
+    @PostMapping("addUser1")
+    public ResponseBody addUser1(String account){
+        si.addUser1(account);
         return new ResponseBody(ResponseStatus.SUCCESS);
     }
 
