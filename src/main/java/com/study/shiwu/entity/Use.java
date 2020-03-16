@@ -12,7 +12,7 @@ import lombok.Data;
  * @date 2020/3/12 14:57
  */
 @Data
-@ApiModel("测试token")
+@ApiModel("用户")
 public class Use {
     private Integer id;
     private String account;

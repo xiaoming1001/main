@@ -10,11 +10,8 @@ import com.study.shiwu.serviceimp.ServiceImp;
 import com.study.shiwu.util.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.xml.transform.Source;
 
 /**
  * @author zm
@@ -30,7 +27,7 @@ public class ControllTest {
     public ResponseBody test3(String account,String pwd){
         Use u=si.selectUser(account, pwd);
         account=u.getAccount();
-        //将token返回给浏览器
+        //登录成功，将token返回给浏览器
         ResponseBody responseBody=new ResponseBody(ResponseStatus.SUCCESS,JwtTokenUtil.createUserToken(account));
         return responseBody;
     }

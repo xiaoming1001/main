@@ -1,6 +1,8 @@
 package com.study.shiwu.databaseioc;
 
 import com.study.shiwu.dao.DaoInt;
+import com.study.shiwu.dao.RoleDao;
+import com.study.shiwu.dao.UserDao;
 import com.study.shiwu.enums.DataBaseType;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,8 +23,13 @@ public class DataSourceAspect {
         //如果连接点所属的类实例是DaoInt
         if(point.getTarget() instanceof DaoInt){
             DatabaseContextHolder.setDatabaseType(DataBaseType.test);
-        }else{
-            //连接点是UserDao,可以不写是默认的数据源
+        }else if(point.getTarget() instanceof UserDao){
+            //连接点是UserDao
+            DatabaseContextHolder.setDatabaseType(DataBaseType.test_db);
+        }else if(point.getTarget() instanceof RoleDao){
+            DatabaseContextHolder.setDatabaseType(DataBaseType.stu);
+        }else {
+            //不属于以上类型，就不用写，这是默认的数据源
             DatabaseContextHolder.setDatabaseType(DataBaseType.test_db);
         }
     }

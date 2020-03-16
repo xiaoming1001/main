@@ -33,7 +33,7 @@ public class Controll {
     }
 
     @ApiOperation("查询数据")
-    @PostMapping("test2")
+    @GetMapping("test2")
     public ResponseBody select1(String card){
         log.info("控制层获取到的卡号："+card);
         User user=si.select1(card);

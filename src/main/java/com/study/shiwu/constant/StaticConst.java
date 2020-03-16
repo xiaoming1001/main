@@ -1,5 +1,8 @@
 package com.study.shiwu.constant;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("常量池")
 public class StaticConst {
     //token秘钥
     public static final String  APP_TOKEN_SECRET = "xiao_ming_xian_sheng";

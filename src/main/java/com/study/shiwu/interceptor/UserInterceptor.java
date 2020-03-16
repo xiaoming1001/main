@@ -3,6 +3,7 @@ package com.study.shiwu.interceptor;    /**
  * @date: 2020/3/11
  */
 import com.study.shiwu.util.JwtTokenUtil;
+import io.swagger.annotations.ApiModel;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2020/3/11 16:08
  * @description 拦截器
  */
+@ApiModel("拦截token")
 public class UserInterceptor implements HandlerInterceptor {
 
     @Override

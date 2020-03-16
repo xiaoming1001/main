@@ -12,6 +12,7 @@ public class DatabaseContextHolder {
         contextHolder.set(type);
     }
 
+
     public static DataBaseType getDatabaseType() {
         return (contextHolder.get());
     }

@@ -40,12 +40,11 @@ public class ServiceImp{
             dao.update1(card1, money1);
             //int i=1/0;
             dao.update1(card2, money2);
-            str="200";
         }else {
             str="201";
         }
 
-       return str;
+       return "str";
     }
 
 
