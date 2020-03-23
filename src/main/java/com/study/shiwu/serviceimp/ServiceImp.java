@@ -1,16 +1,23 @@
 package com.study.shiwu.serviceimp;
 
 import com.study.shiwu.dao.DaoInt;
+import com.study.shiwu.dao.OrderDao;
 import com.study.shiwu.dao.UserDao;
+import com.study.shiwu.entity.Order;
 import com.study.shiwu.entity.Use;
 import com.study.shiwu.entity.User;;
 import com.study.shiwu.error.ZengError;
 import com.study.shiwu.response.ResponseStatus;
+import com.study.shiwu.util.ExcelUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -22,6 +29,9 @@ public class ServiceImp{
     private DaoInt dao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private OrderDao orderDao;
+
     private static final Logger log= LoggerFactory.getLogger(ServiceImp.class);
 
     @Transactional(rollbackFor = Exception.class)
@@ -74,5 +84,46 @@ public class ServiceImp{
     }
     //测试test_db
     public void addUser1(String account){userDao.addUser1(account);}
+
+
+    //写死路径导出ex
+    public List<Order> getOrder(){
+        List<Order> list=orderDao.getOrder();
+        String file="H:\\ex/order.xls";
+        String[] columnNames={"订单ID","订单账号","订单人","电话号码","城市","时间"};
+        String[] columns={"id","account","uName","phone","site","placeTime"};
+        String sheetName="订单信息表";
+        ExcelUtils.exportExcelByList(file,list,columnNames,columns,sheetName);
+        return list;
+    }
+
+    //不写死导出ex
+    public List<Order> getOrder2(String file){
+        List<Order> list=orderDao.getOrder();
+        File f = new File(file);
+        if (!f.exists() && f.isDirectory()) {
+            f.mkdir();
+        }else {
+            System.out.println("已存在，不用创建了！！！");
+        }
+        String[] columnNames={"订单ID","订单账号","订单人","电话号码","城市","时间"};
+        String[] columns={"id","account","uName","phone","site","placeTime"};
+        String sheetName="订单信息表";
+        ExcelUtils.exportExcelByList(file,list,columnNames,columns,sheetName);
+        return list;
+    }
+
+    //导入数据
+    public void addOrder(String filepath) throws Exception {
+        int startrow=0;
+        String[][] o=ExcelUtils.readexcell(filepath,startrow);
+        for (int i=0;i<o.length;i++){
+            System.out.println("输出一号："+o[i].getClass());
+            for (int k=0;k<o.length;k++){
+                System.out.println("输出标题："+o[i][k]);
+            }
+        }
+        System.out.println("得到二维数组是："+o.length);
+    }
 
 }

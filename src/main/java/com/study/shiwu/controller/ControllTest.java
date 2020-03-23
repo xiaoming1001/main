@@ -10,6 +10,7 @@ import com.study.shiwu.serviceimp.ServiceImp;
 import com.study.shiwu.util.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zm
  * @date 2020/3/12 14:51
  */
-@Api("token登录")
+@Api(tags = "测试Token")
 @RestController
 public class ControllTest {
     @Autowired
     private ServiceImp si;
 
-    @RequestMapping("testToken")
+    @PostMapping("testToken")
     public ResponseBody test3(String account,String pwd){
         Use u=si.selectUser(account, pwd);
         account=u.getAccount();
@@ -32,6 +33,6 @@ public class ControllTest {
         return responseBody;
     }
 
-    @RequestMapping("index")
+    //@RequestMapping("index")
     public String index(){return "index";}
 }

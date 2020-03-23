@@ -10,7 +10,7 @@
                  @ApiImplicitParam(name = "personName",value = "姓名",paramType = "query",dataType = "String"),
                  name：参数名    value：参数的汉字说明、解释     required：参数是否必须传    paramType：参数放在哪个地方
         @PathVariable  请求占位符，运用在方法参数内
-            示例：@RequestMapping("add/{name}")  浏览器请求url:http：127.0.0.1：8080/test？name="猪猪侠"
+            示例：@RequestMapping("add/{name}")  浏览器请求url:http：127.0.0.1：8080/test？猪猪侠
                  @PathVariable（“name”）String name
         @PutMapping   应用场景：执行更新操作，后一个请求需要覆盖前一个请求
 

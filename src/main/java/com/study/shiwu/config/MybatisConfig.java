@@ -49,7 +49,7 @@ public class MybatisConfig {
         props.put("url", env.getProperty("datasource.person.url"));
         props.put("username", env.getProperty("datasource.person.username"));
         props.put("password", env.getProperty("datasource.person.password"));
-        System.out.println("数据源一已启动 ："+env.getProperty("datasource.person.url"));
+        System.out.println("数据源二已启动 ："+env.getProperty("datasource.person.url"));
         return  DruidDataSourceFactory.createDataSource(props);
     }
 

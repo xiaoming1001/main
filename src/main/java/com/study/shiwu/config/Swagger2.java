@@ -36,11 +36,11 @@ public class Swagger2 {
         return docket;
     }
 
-    //可配置，可不配置（看心情）
+    //项目的描述信息
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("小明嘟嘟嘟")
-                .version("100.0.1")
+                .title("测试数据")
+                .version("1.0.0")
                 .build();
     }
 }

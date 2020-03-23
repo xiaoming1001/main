@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class TestException {
     //统一处理抛出的异常，必须定义一个方法
+    //ResponseBody(z.getResponseStatus()    返回的事自定义的异常类ResponseBody，而不是Spring 自带的那个
     @ExceptionHandler(ZengError.class)
     @org.springframework.web.bind.annotation.ResponseBody
     public ResponseBody zengmingException(ZengError z){
@@ -19,7 +20,7 @@ public class TestException {
         return new ResponseBody(z.getResponseStatus());
     }
 
-    //如果时为定义的异常，统一抛出失败
+    //如果不是定义好了的定义的异常，统一抛出失败
     @ExceptionHandler(Exception.class)
     @org.springframework.web.bind.annotation.ResponseBody
     public ResponseBody allException(Exception e){

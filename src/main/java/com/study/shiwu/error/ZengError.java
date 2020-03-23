@@ -1,8 +1,11 @@
 package com.study.shiwu.error;
 import com.study.shiwu.response.ResponseStatus;
+import lombok.Data;
+
 /**
  * 定义异常
  * */
+
 public class ZengError extends RuntimeException {
     private ResponseStatus responseStatus;
 
@@ -10,6 +13,7 @@ public class ZengError extends RuntimeException {
     public ZengError(ResponseStatus responseStatus){
         this.responseStatus=responseStatus;
     }
+
 
 
     public ResponseStatus getResponseStatus() {
