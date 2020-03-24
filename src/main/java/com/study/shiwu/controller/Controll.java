@@ -67,10 +67,6 @@ public class Controll {
 
 
 
-
-    //@RequestMapping("index")
-    public String index(){return "index";}
-
     @GetMapping("select/order")
     public ResponseBody getOrder(){
         return new ResponseBody<>(ResponseStatus.SUCCESS,si.getOrder());

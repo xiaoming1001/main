@@ -15,7 +15,7 @@ public class ResponseBody<T> {
     private T data;
 
     public ResponseBody(){}
-    //携带数据返回构造
+    //携带数据返回
     public ResponseBody(ResponseStatus responseStatus,T data){
         this.code=responseStatus.getCode();
         System.out.println("输出："+responseStatus.getCode());//此处响应码引用枚举类的响应码

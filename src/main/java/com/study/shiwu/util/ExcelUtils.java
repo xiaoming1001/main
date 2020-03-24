@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Method;
@@ -291,8 +292,6 @@ public class ExcelUtils {
         }
         return new String(ch);
     }
-
-
     public static void exportBigData(HttpServletResponse response, List list, String[] columnNames, String[] columns, String sheetName, String filename){
 
         OutputStream os = null;

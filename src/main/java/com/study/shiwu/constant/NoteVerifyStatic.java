@@ -12,16 +12,16 @@ import io.swagger.annotations.ApiModel;
 @ApiModel("短信验证常量池")
 public class NoteVerifyStatic {
     //发送验证码的请求路径URL
-    private static final String SERVER_URL = "https://api.netease.im/sms/sendcode.action";
+    public static final String SERVER_URL = "https://api.netease.im/sms/sendcode.action";
     //网易云信分配的账号，请替换你在管理后台应用下申请的Appkey
-    private static final String APP_KEY = "165549ede8e1101724b2e64ed486438f";
+    public static final String APP_KEY = "b34fa24593a2d524a88c57a2b005d028";
     //网易云信分配的密钥，请替换你在管理后台应用下申请的appSecret
-    private static final String APP_SECRET = "16c19517fbc9";
+    public static final String APP_SECRET = "93d44ec445ac";
     //随机数
-    private static final String NONCE = "510722";
+    public static final String NONCE = "123456";
     //短信模板ID
-    private static final String TEMPLATEID = "14853087";
+    public static final String TEMPLATEID = "14862010";
     //验证码长度，范围4～10，默认为4
-    private static final String CODELEN = "6";
+    public static final String CODELEN = "6";
 
 }

@@ -9,6 +9,7 @@ import com.study.shiwu.entity.User;;
 import com.study.shiwu.error.ZengError;
 import com.study.shiwu.response.ResponseStatus;
 import com.study.shiwu.util.ExcelUtils;
+import com.study.shiwu.util.NoteUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -124,6 +124,12 @@ public class ServiceImp{
             }
         }
         System.out.println("得到二维数组是："+o.length);
+    }
+
+    //通过电话号码获取验证码
+    public String getNote(String phone) throws Exception {
+        String result= NoteUtil.add(phone);
+        return result;
     }
 
 }

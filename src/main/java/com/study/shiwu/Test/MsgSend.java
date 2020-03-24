@@ -82,7 +82,7 @@ public class MsgSend {
         //获取发送状态码
         String code = JSON.parseObject(result).getString("code");
 
-        String phoneStr="520135";
+        String phoneStr=obj;
         if (code.equals("200") && obj.equals(phoneStr)) {
             // 发送成功
             System.out.println("登录成功");
