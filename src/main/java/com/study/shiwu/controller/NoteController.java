@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @date 2020/3/23 17:36
  */
 @RestController
-@Api("短信验证")
+@Api(tags = "短信验证")
 public class NoteController {
     @Autowired
     private ServiceImp si;
@@ -35,6 +35,7 @@ public class NoteController {
     public ResponseBody getNote(String phone) throws Exception {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //System.out.println("获取到用户的IP："+request.getRemoteAddr());
+        System.out.println(phone);
         HttpSession session = request.getSession();
        //返回一个json字符串
         String jsonObj= si.getNote(phone);

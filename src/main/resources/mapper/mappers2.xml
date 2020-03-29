@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.shiwu.dao.UserDao">
+
+    <!--多数据源，添加数据进2号数据库：test_db-->
+    <insert id="addUser1" parameterType="com.study.shiwu.entity.User">
+        insert into user(account)values (#{account})
+    </insert>
+
+</mapper>

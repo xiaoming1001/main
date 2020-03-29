@@ -27,8 +27,6 @@ public class DataSourceAspect {
         }else if(point.getTarget() instanceof UserDao){
             //连接点是UserDao
             DatabaseContextHolder.setDatabaseType(DataBaseType.test_db);
-        }else if(point.getTarget() instanceof OrderDao){
-            DatabaseContextHolder.setDatabaseType(DataBaseType.stu);
         }else {
             //不属于以上类型，就不用写，这是默认的数据源
             DatabaseContextHolder.setDatabaseType(DataBaseType.test_db);

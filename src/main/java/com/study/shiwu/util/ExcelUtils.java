@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -18,6 +19,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author zm
@@ -31,29 +33,48 @@ public class ExcelUtils {
      * @Result         返回一个二维数组（第一维放的是行，第二维放的是列表）
      * @throws         Exception
      */
-    public static String[][] readexcell(String filepath,int startrow) throws Exception{
-        // 判断文件是否存在
-        File file = new File(filepath);
-        if (!file.exists()) {
-            throw new IOException("文件" + filepath + "W不存在！");
+    public static String[][] readexcell(String filepath, int startrow, MultipartFile upload) throws Exception{
+        //获取原始文件名称
+        filepath=upload.getOriginalFilename();
+        //设置文件上传的位置
+        String path="C:/Users/ASUS/upload/";
+        // 创建文件对象
+        File file = new File(path);
+        //判断文件是否存在
+        if (!file.exists()){
+            file.mkdirs();
         }
-        //获取sheet
-        Sheet sheet = getSheet(filepath);
-        // 得到总行数
+        //设置文件名唯一值
+        String uuid= UUID.randomUUID().toString().replace("_","");
+        String filepath1=uuid+"_"+filepath;
+        System.out.println("唯一文件名字是："+filepath1);
+        //新路径
+        String path1="C:/Users/ASUS/upload/"+filepath1;
+        System.out.println("新的文件路径是："+path1);
+        //上传新的位置
+        upload.transferTo(new File(path1));
+        //获取工作表sheet（文件存在的时候调用：getSheet(filepath) 来取得工作表）
+        Sheet sheet = getSheet(path1);
+        System.out.println("取得工作表的名称："+sheet.getSheetName()+":-----"+"这里获取需要的工作表是："+sheet);
+        // 得到总行数(+1 第一行是表头，不是数据)
         int rowNum = sheet.getLastRowNum()+1;
-        // 根据第一行获取列数
+        System.out.println("得到总行数："+rowNum);
+        // 获取第一行(从下标0开始)的整列数据（横向）
         Row row = sheet.getRow(0);
+        System.out.println("根据第一行的整列数据："+row.getCell(0)+"--"+row.getCell(1)+"--"+row.getCell(2));
         //获取总列数
         int colNum = row.getPhysicalNumberOfCells();
-        //根据行列创建二维数组
+        System.out.println("获取到的总列数是："+colNum);
+        //根据行列创建二维数组[行数据][列数据]     [rowNum-startrow]总行数-起始行
         String[][] content = new String[rowNum-startrow][colNum];
+        //用来储存每个单元格的值
         String[] cols = null;
         //通过循环，给二维数组赋值
         for (int i = startrow; i < rowNum; i++) {
             row = sheet.getRow(i);
             cols = new String[colNum];
             for (int j = 0; j < colNum; j++) {
-                //获取每个单元格的值
+                //获取每个单元格的值（调用：getCellValue(row.getCell(j) 来取得每一个单元格的值）
                 cols[j] = getCellValue(row.getCell(j));
                 //把单元格的值存入二维数组
                 content[i - startrow][j] =cols[j];
@@ -67,58 +88,74 @@ public class ExcelUtils {
      * @throws Exception
      */
     public static Sheet getSheet(String file) throws Exception {
-        //文件后缀
+        //通过截取，取得文件后缀
         String extension = file.lastIndexOf(".") == -1 ? "" : file.substring(file.lastIndexOf("."));
-        //创建输入流
+        //创建输入流（从文件--->内存读取）
         InputStream is = new FileInputStream(file);
-        if (".xls".equals(extension)) {//2003
+        //通过文件后缀名称获取工作簿
+        if (".xls".equals(extension)) {   //2003版本使用此文件后缀
             //获取工作薄
             POIFSFileSystem fs = new POIFSFileSystem(is);
             return new HSSFWorkbook(fs).getSheetAt(0);
-        } else if (".xlsx".equals(extension) || ".xlsm".equals(extension)) {
+
+        } else if (".xlsx".equals(extension) || ".xlsm".equals(extension)) {   //2007使用此文件后缀
             return new XSSFWorkbook(is).getSheetAt(0);
         } else {
+            //当文件后缀无法识别
             throw new IOException("文件（" + file + "）,无法识别！");
         }
     }
+
+
     /**
      * 功能:获取单元格的值
      */
     public static String getCellValue(Cell cell) {
+        //创建一个空的对象
         Object result = "";
+
         if (cell != null) {
+            //循环单元格的值   cell.getCellType()默认类型是int
             switch (cell.getCellType()) {
+                //字符串型
                 case Cell.CELL_TYPE_STRING:
                     result = cell.getStringCellValue();
                     break;
+                    //数值型
                 case Cell.CELL_TYPE_NUMERIC:
-                    // 在excel里,日期也是数字,在此要进行判断
-                    if(HSSFDateUtil.isCellDateFormatted(cell)){
+                    if(HSSFDateUtil.isCellDateFormatted(cell)){             // 在excel里,日期也是数字,在此要进行判断
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date date = cell.getDateCellValue();
                         result =  sdf.format(date);
                     }else{
-                        DecimalFormat df=new DecimalFormat("#");
+                        DecimalFormat df=new DecimalFormat("#");     //普通数值型
                         result=df.format(cell.getNumericCellValue());
                     }
                     break;
+                    //布尔型
                 case Cell.CELL_TYPE_BOOLEAN:
                     result = cell.getBooleanCellValue();
                     break;
+                    //公式型
                 case Cell.CELL_TYPE_FORMULA:
                     result = cell.getCellFormula();
                     break;
+                    //错误
                 case Cell.CELL_TYPE_ERROR:
                     result = cell.getErrorCellValue();
                     break;
+                    //空值
                 case Cell.CELL_TYPE_BLANK:
                     break;
+                    //其他，没有任何数据也必须写
                 default:
                     break;
             }
         }
         return result.toString();
     }
+
+
 
 
 

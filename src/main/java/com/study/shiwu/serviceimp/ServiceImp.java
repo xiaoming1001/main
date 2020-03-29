@@ -10,13 +10,16 @@ import com.study.shiwu.error.ZengError;
 import com.study.shiwu.response.ResponseStatus;
 import com.study.shiwu.util.ExcelUtils;
 import com.study.shiwu.util.NoteUtil;
+import org.aspectj.weaver.ast.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,7 +41,7 @@ public class ServiceImp{
     public String update1(String card1,String card2,double money) {
         String str="";
         //通过账号获得卡内余额
-      User user=dao.select1(card1);
+     /* User user=dao.select1(card1);
       User user1=dao.select1(card2);
       log.info("原账号"+card1+"的余额是"+user.getMoney());
       log.info("被转账的账号"+card2+"的余额是"+user.getMoney());
@@ -52,7 +55,7 @@ public class ServiceImp{
             dao.update1(card2, money2);
         }else {
             str="201";
-        }
+        }*/
 
        return "str";
     }
@@ -67,12 +70,13 @@ public class ServiceImp{
 
 
     public void addUser(User user){
-        if (user.getCard().equals("1003")){
+       /* if (user.getCard().equals("1003")){
             System.out.println("只有等于1003才执行，这个异常方法");
             throw new ZengError(ResponseStatus.TONG_MING);
-        }
+        }*/
         dao.addUser(user);
     }
+
 
     public void updateUser(String card,double money){
         dao.updateUser(card,money);
@@ -113,23 +117,49 @@ public class ServiceImp{
         return list;
     }
 
-    //导入数据
-    public void addOrder(String filepath) throws Exception {
-        int startrow=0;
-        String[][] o=ExcelUtils.readexcell(filepath,startrow);
-        for (int i=0;i<o.length;i++){
-            System.out.println("输出一号："+o[i].getClass());
-            for (int k=0;k<o.length;k++){
-                System.out.println("输出标题："+o[i][k]);
-            }
-        }
-        System.out.println("得到二维数组是："+o.length);
-    }
-
     //通过电话号码获取验证码
     public String getNote(String phone) throws Exception {
         String result= NoteUtil.add(phone);
         return result;
     }
+
+
+    //导入Excle表数据****
+    public void fileImport(String filepath, int startrow, MultipartFile upload) throws Exception {
+        //得到一个二维数组
+        String[][] count=ExcelUtils.readexcell(filepath,startrow,upload);
+        //导入之前查询已有的数据，避免重复导入
+        List<String> listAccount=orderDao.getOrderAccount();
+        //声明集合储存导入的订单
+        List<Order> list=new ArrayList<>();
+        for (int i=0;i<count.length;i++){
+            System.out.println("外循环得到对象：-----------------------------"+i);
+            Order order1=new Order();
+            for (int k=0;k<count[i].length;k++){
+                System.out.println("内循环得到对象的属性--- ："+count[i][k]);
+                order1.setId(Integer.parseInt(count[i][0]));
+                order1.setAccount(count[i][1]);
+                order1.setuName(count[i][2]);
+                order1.setPhone(count[i][3]);
+                order1.setSite(count[i][4]);
+                order1.setPlaceTime(count[i][5]);
+            }
+            list.add(order1);
+        }
+        //再次循环获取没有重复的数据
+        for (int i=0;i<list.size();i++){
+            for (int j=0;j<listAccount.size();j++){
+                if (list.get(i).getAccount().equals(listAccount.get(j))){
+                    list.remove(list.get(i));
+                    }
+                }
+            }
+        //将新数据存入数据库
+        for (int m=0;m<list.size();m++){
+            Order order=list.get(m);
+            orderDao.addOrder(order);
+            }
+        }
+
 
 }

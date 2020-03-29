@@ -31,7 +31,7 @@ public class JwtTokenUtil {
     }
 
     //建立用户token(*********)
-    public static String createUserToken(String  account) {
+    public static String  createUserToken(String  account) {
         Algorithm algorithm = Algorithm.HMAC256(StaticConst.APP_TOKEN_SECRET);
         String token = JWT.create()
                 .withIssuer("auth0")

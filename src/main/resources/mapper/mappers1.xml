@@ -38,6 +38,7 @@
         where card=#{card}
     </update>
 
+    <!--查询账号密码-->
     <select id="selectUser" parameterType="com.study.shiwu.entity.Use" resultType="com.study.shiwu.entity.Use">
         select * from user where account=#{account} and pwd=#{pwd}
     </select>

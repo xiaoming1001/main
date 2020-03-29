@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 /**
  * @author zm
  * @date 2020/3/23 16:09
+ * 短信验证加密工具
  */
 public class CheckSumBuilder {
     // 计算并获取CheckSum

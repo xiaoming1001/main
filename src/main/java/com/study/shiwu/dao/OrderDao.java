@@ -2,6 +2,7 @@ package com.study.shiwu.dao;
 
 import com.study.shiwu.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface OrderDao {
     List<Order> getOrder();
 
     void addOrder(Order order);
+
+    List<String> getOrderAccount();
 }

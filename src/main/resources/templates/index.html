@@ -15,11 +15,22 @@
 <input type="text" name="pwd" placeholder="账号" id="c2">
 <button id="button2">立即登录</button><br/>
 
+<form action="http://localhost:8080/fileInport" method="post" enctype = "multipart/form-data">
+    <input type="file" name="upload">
+    <input type="text" name="startrow" placeholder="整型">
+    <input type="submit" value="立即上传">
+</form>
+</body>
+
 
 </body>
 <script type="text/javascript">
 
-    window.token = '';
+</script>
+<script type="text/javascript">
+
+
+  <!--  window.token = '';
     function testToken() {
         ajaxWithToken(
             'login',
@@ -89,7 +100,7 @@
                 }
             })
         })
-    })
+    })-->
 </script>
 
 <style type="text/css">

@@ -8,8 +8,12 @@
     </select>
 
     <insert id="addOrder" parameterType="com.study.shiwu.entity.Order">
-        insert into orders(account,uName,phone,site,placeTime)values (#{account},#{uName},#{phone},#{site},#{placeTime},)
+        insert into orders(account,uName,phone,site,placeTime)values(#{account},#{uName},#{phone},#{site},#{placeTime})
     </insert>
+
+    <select id="getOrderAccount" resultType="String">
+        select account from orders
+    </select>
 
 
 </mapper>

@@ -78,9 +78,9 @@ public class Controll {
         return new ResponseBody<>(ResponseStatus.SUCCESS,si.getOrder2(file));
     }
 
-    @GetMapping("add/order")
+   /* @GetMapping("add/order")
     public ResponseBody addOrder(String filepath) throws Exception {
         si.addOrder(filepath);
         return new ResponseBody<>(ResponseStatus.SUCCESS);
-    }
+    }*/
 }

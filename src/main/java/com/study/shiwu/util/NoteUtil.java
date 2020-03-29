@@ -57,7 +57,7 @@ public class NoteUtil {
        HttpResponse response = httpClient.execute(httpPost);
        //获得执行结果
        String result = EntityUtils.toString(response.getEntity(), "utf-8");
-
+       System.out.println(result+"=======");
        //--------------------- 接受返回参数，判断---------------------
        String obj = JSON.parseObject(result).getString("obj");
        //获取发送状态码
